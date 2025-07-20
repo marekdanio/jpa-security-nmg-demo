@@ -1,4 +1,4 @@
-package repository;
+package org.nmg.demo.jpasecuritynmgdemo.repository;
 
 import org.nmg.demo.jpasecuritynmgdemo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

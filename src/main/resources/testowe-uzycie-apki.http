@@ -1,5 +1,45 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+### Logowanie
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
 
-###
+{
+  "username": "john",
+  "password": "e5"
+}
+
+### Pobranie GRY o id 1
+GET http://localhost:8080/api/games/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzUzMDE1NzM5LCJleHAiOjE3NTMxMDIxMzl9.vi11IT0fgEyP_zb6Sj0u2yQw3GGM3VkpifOIfkOvZo4
+
+### Pierwsza strona z 2 elementami
+GET http://localhost:8080/api/games?page=0&size=2&sortBy=title
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzUzMDE1NzM5LCJleHAiOjE3NTMxMDIxMzl9.vi11IT0fgEyP_zb6Sj0u2yQw3GGM3VkpifOIfkOvZo4
+
+### Druga strona z sortowaniem po gatunku
+GET http://localhost:8080/api/games?page=1&size=3&sortBy=genre
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzUzMDE1NzM5LCJleHAiOjE3NTMxMDIxMzl9.vi11IT0fgEyP_zb6Sj0u2yQw3GGM3VkpifOIfkOvZo4
+
+### Zapis nowej gry
+POST http://localhost:8080/api/games
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzUzMDE1NzM5LCJleHAiOjE3NTMxMDIxMzl9.vi11IT0fgEyP_zb6Sj0u2yQw3GGM3VkpifOIfkOvZo4
+Content-Type: application/json
+
+{
+  "title": "Nowa Gra2",
+  "description": "Opis nowej gry",
+  "genre": "Action",
+  "platform": "PC",
+  "releaseDate": "2024-01-15",
+  "totalCopies": 10,
+  "availableCopies": 10
+}
+
+### Wypożyczanie gry o id 1 dla użytkownika z tego tokenu
+POST http://localhost:8080/api/rentals/rent/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzUzMDE0NDQ2LCJleHAiOjE3NTMxMDA4NDZ9.oLNIIIAlIey7mTw2T5NHOc58UDeaZb95RBIlrz8KmXw
+
+### Zwrócenie gry dla użytownika z tego tokenu
+POST http://localhost:8080/api/rentals/return/game/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzUzMDE1NzM5LCJleHAiOjE3NTMxMDIxMzl9.vi11IT0fgEyP_zb6Sj0u2yQw3GGM3VkpifOIfkOvZo4
+
+

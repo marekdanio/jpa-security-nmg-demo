@@ -1,4 +1,5 @@
-package repository;
+
+package org.nmg.demo.jpasecuritynmgdemo.repository;
 
 import org.nmg.demo.jpasecuritynmgdemo.entity.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,11 +17,4 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
     @Query("SELECT g FROM Game g WHERE g.availableCopies > 0")
     List<Game> findAvailableGames();
-
-    @Query("SELECT DISTINCT g.genre FROM Game g ORDER BY g.genre")
-    List<String> findAllGenres();
-
-    @Query("SELECT DISTINCT g.platform FROM Game g ORDER BY g.platform")
-    List<String> findAllPlatforms();
 }
-

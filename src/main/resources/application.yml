@@ -1,0 +1,73 @@
+
+spring:
+  # Konfiguracja połączenia z bazą danych
+  datasource:
+    # URL połączenia z bazą H2 w pamięci (dane znikają po restarcie aplikacji)
+    url: jdbc:h2:mem:gamelibrary
+    # Sterownik JDBC dla bazy danych H2
+    driver-class-name: org.h2.Driver
+    # Nazwa użytkownika do połączenia z bazą (domyślna dla H2)
+    username: sa
+    # Hasło do połączenia z bazą (puste dla H2 in-memory)
+    password: password
+
+  # Konfiguracja konsoli H2 (interfejs webowy do przeglądania bazy danych)
+  h2:
+    console:
+      # Włącza konsolę H2 dostępną przez przeglądarkę
+      enabled: true
+      # Ścieżka URL pod którą będzie dostępna konsola (http://localhost:8080/h2-console)
+      path: /h2-console
+
+  # Konfiguracja JPA (Java Persistence API) i Hibernate
+  jpa:
+    # Określa dialekt bazy danych dla Hibernate (optymalizuje zapytania SQL)
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      # Strategia tworzenia schematu bazy danych:
+      # create-drop = tworzy tabele przy starcie, usuwa przy zamknięciu
+      # create = tworzy tabele przy starcie
+      # update = aktualizuje schemat bez usuwania danych
+      # validate = tylko sprawdza zgodność schematu
+      ddl-auto: create-drop
+    # Wyświetla wykonywane zapytania SQL w konsoli (przydatne do debugowania)
+    show-sql: true
+    # Dodatkowe właściwości Hibernate
+    properties:
+      hibernate:
+        # Formatuje zapytania SQL w konsoli (czytelniejsze wyświetlanie)
+        format_sql: true
+
+    # Odłożenie inicjalizacji danych do po utworzeniu schematu
+    defer-datasource-initialization: true
+
+
+  # Konfiguracja inicjalizacji danych
+  sql:
+    init:
+      # Włącza wykonywanie skryptów SQL przy starcie (tylko dla data.sql)
+      mode: always
+      # Kodowanie plików SQL
+      encoding: UTF-8
+      # Kontynuuj przy błędach (opcjonalne)
+      continue-on-error: false
+
+# Konfiguracja JWT (JSON Web Token) - niestandardowe właściwości aplikacji
+jwt:
+  # Sekretny klucz do podpisywania tokenów JWT (w produkcji powinien być dłuższy i bezpieczniejszy)
+  # UWAGA: Ten klucz powinien być przechowywany jako zmienna środowiskowa!
+  secret: mySecretKey123456789012345678901234567890
+  # Czas życia tokenu w milisekundach (86400000 ms = 24 godziny)
+  expiration: 86400000
+
+# Konfiguracja logowania
+logging:
+  level:
+    # Poziom logowania dla Spring Security (DEBUG pokazuje szczegóły autoryzacji)
+    org.springframework.security: DEBUG
+    # Poziom logowania dla zapytań SQL Hibernate (DEBUG pokazuje parametry zapytań)
+    org.hibernate.SQL: DEBUG
+
+
+
+
